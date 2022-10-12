@@ -3,9 +3,27 @@ import com.sun.xml.internal.bind.v2.runtime.Coordinator
 import java.io.File
 
 class Player(_name: String,
-            var healthPoints: Int = 100,
+            override var healthPoints: Int = 100,
             var isBlessed: Boolean,
-            var isImmortal: Boolean) {
+            var isImmortal: Boolean) : Fightable {
+
+    override val diceCount: Int = 3
+//        get() = TODO("Not yet implemented")
+    override val diceSides: Int = 6
+//        get() = TODO("Not yet implemented")
+
+    override fun attack(opponent: Fightable): Int {
+//        TODO("Not yet implemented")
+        val damageDealt = if (isBlessed) {
+            damageRoll * 2
+        } else {
+            damageRoll
+        }
+        opponent.healthPoints -= damageDealt
+        return damageDealt
+    }
+
+
     var name = _name
         get() = "${field.capitalize()} of $hometown"
         private set(value) {
@@ -58,6 +76,7 @@ class Player(_name: String,
 
     //延迟初始化
     lateinit var alignment: String
+
     fun determineFate() {
         alignment = "Good"
     }
