@@ -1,6 +1,7 @@
 import kotlin.math.roundToInt
 import java.io.File
 import java.io.PrintStream
+import com.bignerdranch.nyethack.extensions.random
 
 const val TAVERN_NAME = "Taernyl's Folly"
 
@@ -15,6 +16,9 @@ val menuList = File("NyetHack/data/tavern-menu-items")
     .split("\r\n")
 //val patronGold = mapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5)
 val patronGold = mutableMapOf<String, Double>()
+
+//private fun <T> Iterable<T>.random() : T = this.shuffled().first()
+
 fun main() {
 /*//    val beverage = readLine() ?.replaceFirstChar { it.uppercase() }
 //    var beverage = readLine()?.capitalize()
@@ -79,8 +83,8 @@ fun main() {
         println("$index : $data")
     }*/
     (0..9).forEach {
-        val first = patronList.shuffled().first()
-        val last = lastName.shuffled().first()
+        val first = patronList.random()/*.shuffled().first()*/
+        val last = lastName.random()/*.shuffled().first()*/
         val name = "$first $last"
 //        println(name)
         uniquePatrons += name
@@ -92,8 +96,8 @@ fun main() {
 
     var orderCount = 0
     while (orderCount <= 9) {
-        placeOrder(uniquePatrons.shuffled().first(),
-            menuList.shuffled().first())
+        placeOrder(uniquePatrons.random()/*.shuffled().first()*/,
+            menuList.random()/*.shuffled().first()*/)
         orderCount++
     }
 //    println(patronGold)
@@ -139,6 +143,10 @@ private fun toDragonSpeak(phrase: String) =
             else -> it.value
         }
     }
+/*
+深入学习改动
+private String.replaceDragonSpeak = this.replace.........
+* */
 
 
 private fun placeOrder(patronName: String, menuData: String) {

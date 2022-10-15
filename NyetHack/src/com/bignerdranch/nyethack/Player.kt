@@ -1,6 +1,7 @@
 package com.bignerdranch.nyethack
 import com.sun.xml.internal.bind.v2.runtime.Coordinator
 import java.io.File
+import com.bignerdranch.nyethack.extensions.random as randomizer
 
 class Player(_name: String,
             override var healthPoints: Int = 100,
@@ -71,8 +72,10 @@ class Player(_name: String,
     private fun selectHometown() = File("NyetHack/data/towns.txt")
         .readText()
         .split("\r\n")
-        .shuffled()
-        .first()
+//        .random()
+        .randomizer()
+        /*.shuffled()
+        .first()*/
 
     //延迟初始化
     lateinit var alignment: String
