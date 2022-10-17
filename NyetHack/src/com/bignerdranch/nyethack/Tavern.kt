@@ -10,7 +10,13 @@ var playerSilver = 10*/
 //val patronList = listOf("Eli", "Mordoc", "Sophie")
 val patronList = mutableListOf("Eli", "Mordoc", "Sophie")
 val lastName = listOf("Ironfoot", "Fernsworth", "Baggins")
-val uniquePatrons = mutableSetOf<String>()
+//val uniquePatrons = mutableSetOf<String>()
+val uniquePatrons: Set<String> = generateSequence {
+    val first = patronList.random()
+    val last = lastName.random()
+    "$first $last"
+}.take(10).toSet()
+
 val menuList = File("NyetHack/data/tavern-menu-items")
     .readText()
     .split("\r\n")
@@ -82,17 +88,19 @@ fun main() {
     menuList.forEachIndexed { index, data ->
         println("$index : $data")
     }*/
-    (0..9).forEach {
-        val first = patronList.random()/*.shuffled().first()*/
-        val last = lastName.random()/*.shuffled().first()*/
+    /*(0..9).forEach {
+        val first = patronList.random()*//*.shuffled().first()*//*
+        val last = lastName.random()*//*.shuffled().first()*//*
         val name = "$first $last"
 //        println(name)
         uniquePatrons += name
-    }
+    }*/
 //    println(uniquePatrons)
     uniquePatrons.forEach {
         patronGold[it] = 6.0
     }
+
+//    val patronGold: Map<String,Double> = uniquePatrons.zip(DoubleArray(uniquePatrons.size) { 6.0 }.asList() ).toMap()
 
     var orderCount = 0
     while (orderCount <= 9) {
